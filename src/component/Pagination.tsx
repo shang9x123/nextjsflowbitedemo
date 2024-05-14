@@ -2,7 +2,7 @@
 "use client";
 
 import { Pagination } from "flowbite-react";
-import { redirect } from "next/navigation";
+import { redirect, useParams, usePathname } from "next/navigation";
 import { useRouter } from 'next/navigation'
 import { useState } from "react";
 
@@ -15,15 +15,17 @@ export function ComPagination({ page, totalPages }: ComPaginationProps) {
     const router = useRouter();
 
     const currentUrl = router; // Gets the current URL
-
+    const currentpathname = usePathname();
+    const currentparams = useParams();
+    console.log(currentparams);
     // Now you can use the currentUrl variable as needed
-    console.log('Current URL:', router);
+    console.log('Current URL:', currentpathname);
 
     const [currentPage, setCurrentPage] = useState(1);
     const onPageChange = (page: number) => {
         setCurrentPage(page);
         console.log(page);
-        router.push(currentUrl + '/?page=' + page);
+        router.push('http://localhost:3000' + currentpathname + '/?page=' + page);
     };
 
     return (
